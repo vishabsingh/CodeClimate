@@ -1,0 +1,50 @@
+version: "2"         
+checks:
+  argument-count:
+    config:
+      threshold: 4
+  complex-logic:
+    config:
+      threshold: 4
+  file-lines:
+    config:
+      threshold: 250
+  method-complexity:
+    config:
+      threshold: 5
+  method-count:
+    config:
+      threshold: 20
+  method-lines:
+    config:
+      threshold: 25
+  nested-control-flow:
+    config:
+      threshold: 4
+  return-statements:
+    config:
+      threshold: 4
+  similar-code:
+    config:
+      threshold: # language-specific defaults. an override will affect all languages.
+  identical-code:
+    config:
+      threshold: # language-specific defaults. an override will affect all languages.
+plugins:
+  sonar-java:
+    enabled: true
+    config:
+      sonar.java.source: "7"
+      sonar.java.pmd.reportPaths: "./target/code_quality/pmd.xml"
+      tests_patterns:
+        - src/test/**
+      minimum_severity: info
+  pmd:
+    enabled: true
+    config:
+      rules:
+        - "java-basic"
+        - "java-design"
+        - "java-junit"
+  checkstyle:
+    enabled: true

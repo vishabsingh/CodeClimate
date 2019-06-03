@@ -1,0 +1,44 @@
+version: 2
+jobs:
+  build:
+    environment:
+      CC_TEST_REPORTER_ID: b9da374eadcb9306c14c31732f7d10b3fcfe271589048ad21cef5fa2d7477cf6
+      MONGO_URL: "mongodb://localhost:27017/data"
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+      - image: circleci/mongo:4.0.9
+    working_directory: ~/rectrepo
+    steps:
+      - checkout
+      # RUN TEST CASES
+      - run:
+          name: Run Unit Tests
+          command: mvn clean test
+
+      # SetUp Code Climate
+      - run:
+          name: Code Climate Test-Reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+
+      # Set Up Jacoco Path
+      - run:
+          name: JACOCO PATH FOR CODE CLIMATE
+          command: JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter format-coverage target/site/jacoco/jacoco.xml --input-type jacoco
+
+      # Upload Code Climate
+      - run:
+          name: Upload Code Climate Report
+          command: ./cc-test-reporter upload-coverage -r $CC_TEST_REPORTER_ID
+          when: on_success
+      - run:
+          name: Save Test Results
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/test-results
+      - store_artifacts:
+          path: ~/test-results/junit

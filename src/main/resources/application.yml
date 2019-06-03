@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      database: BlogReactive
+      host: localhost
+      port: 27017
+      #username: root
+      #password: admin
+      #authentication-database: admin
+      
+server:
+  port: 8086
