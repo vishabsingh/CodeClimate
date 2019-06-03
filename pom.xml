@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.vn.react</groupId>
-	<artifactId>reactivemongodb</artifactId>
+	<artifactId>codeclimate</artifactId>
 	<version>2.0</version>
 	<name>codeclimate</name>
 	<description>Reactive RESTful Web Service</description>
