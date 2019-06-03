@@ -1,26 +1,23 @@
 package com.vn.react.modal;
 
-import java.io.Serializable;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 
 
 /**
- * 
+ * Blog Entity.
  * @author vishab.singh
  *
  */
 @Document(collection = "BLOG")
 public class Blog implements Serializable{ 
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -38,15 +35,15 @@ public class Blog implements Serializable{
 	private String author;
 	
 	/**
-	 * Default COns
+	 * Default Constructor.
 	 */
 	public Blog() {
 	}
 	/**
-	 * 
 	 * @param title
 	 * @param content
 	 * @param author
+	 * * @throws Exception when this exceptional condition happens
 	 */
 	public Blog(final String title, final String content, final String author) {
 		this.title = title;
