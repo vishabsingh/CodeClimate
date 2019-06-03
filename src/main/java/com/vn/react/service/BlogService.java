@@ -29,28 +29,28 @@ public interface BlogService {
 
     /**
      * Return All Blog
-     * @return
+     * @return Flux<Blog>Find All Blogs </Blog>
      */
     Flux<Blog> findAll();
 
     /**
      * 
      * @param blogId
-     * @return
+     * @return Mono<Blog>Find One Records </Blog>
      */
     Mono<Blog> findOne(String blogId);
 
     /**
      * 
      * @param blogId
-     * @return
+     * @return Mono<ResponseEntity> Delete </ResponseEntity>
      */
     Mono<ResponseEntity<Void>> delete(String blogId);
 
     /**
      * 
      * @param blogAuthor
-     * @return Blog Author
+     * @return Flux<Blog> FindBy Author</Blog>
      */
     Flux<Blog> findByAuthor(String blogAuthor);
 
