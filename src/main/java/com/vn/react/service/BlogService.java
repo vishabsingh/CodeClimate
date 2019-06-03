@@ -13,29 +13,22 @@ import reactor.core.publisher.Mono;
 public interface BlogService {
 
 	/**
-	 * @param blog
-	 * {@return Create Blog.}
+	 * create new blog
 	 */
 	Mono<Blog> createBlog(Blog blog);
 
 	/**
-	 * 
-	 * @param blog
-	 * @param blogId
-	 * {@return List<Mono> Updated Blog.}
+	 List<Mono> Updated Blog.
 	 */
     Mono<Blog> updateBlog(Blog blog, String blogId);
 
     /**
-     * Return All Blog
-     * {@return Flux<Blog>Find All Blog.}
+     * Return All Blog.
      */
     Flux<Blog> findAll();
 
     /**
-     * 
-     * @param blogId
-     * {@return Mono<Blog>Find One Records.}
+     * @return Mono<Blog>Find One Records.
      */
     Mono<Blog> findOne(String blogId);
 

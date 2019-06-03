@@ -1,6 +1,5 @@
 package com.vn.react.service;
 
-
 import com.vn.react.dao.BlogRepository;
 import com.vn.react.filters.BlogFliter;
 import com.vn.react.modal.Blog;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import java.util.List;
 
 @Service
@@ -58,7 +56,7 @@ public class BlogSeviceImpls  implements BlogService{
 	public Mono<Blog> findOne(final String blogId) {
 		return blogRepo.findById(blogId)
 				.switchIfEmpty(Mono.error(
-						new Exception("No Blog Found With id "+blogId)
+						new Exception("No Blog Found With id ".concat(blogId))
 				));
 	}
 
