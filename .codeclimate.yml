@@ -35,7 +35,6 @@ plugins:
     enabled: true
     config:
       sonar.java.source: "7"
-      sonar.java.pmd.reportPaths: "./target/code_quality/pmd.xml"
       tests_patterns:
         - src/test/**
       minimum_severity: info
