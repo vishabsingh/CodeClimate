@@ -1,20 +1,19 @@
 package com.vn.react.service;
 
-import java.util.List;
 
+import com.vn.react.dao.BlogRepository;
+import com.vn.react.filters.BlogFliter;
+import com.vn.react.modal.Blog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import com.vn.react.dao.BlogRepository;
-import com.vn.react.filters.BlogFliter;
-import com.vn.react.modal.Blog;
-
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @Service
 public class BlogSeviceImpls  implements BlogService{
@@ -57,12 +56,15 @@ public class BlogSeviceImpls  implements BlogService{
 	
 	@Override
 	public Mono<Blog> findOne(final String blogId) {
-		return blogRepo.findById(blogId).switchIfEmpty(Mono.error(new Exception("No Blog Found With id "+blogId)));
+		return blogRepo.findById(blogId)
+				.switchIfEmpty(Mono.error(
+						new Exception("No Blog Found With id "+blogId)
+				));
 	}
 
 
 	@Override
-	public Mono<ResponseEntity<Void>> delete(final String blogId) {		
+	public Mono<ResponseEntity<Void>> delete(final String blogId) {
 		return blogRepo.findById(blogId)
 				.flatMap(existingBlog -> 
 							blogRepo.delete(existingBlog)
@@ -80,7 +82,4 @@ public class BlogSeviceImpls  implements BlogService{
 	public Flux<Blog> findByTitleOwn(final String blogTitle) {
 		return blogRepo.findByTitle(blogTitle);
 	}
-	public void m1(int a,int b){
-
- 	}
 }

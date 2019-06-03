@@ -15,7 +15,7 @@ public interface BlogService {
 	/**
 	 * 
 	 * @param blog
-	 * @return Create Blog.
+	 * {@return Create Blog.}
 	 */
 	Mono<Blog> createBlog(Blog blog);
 
