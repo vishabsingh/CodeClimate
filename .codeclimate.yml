@@ -47,3 +47,12 @@ plugins:
         - "java-junit"
   checkstyle:
     enabled: true
+    checks:
+      com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck:
+        enabled: false
+  duplication:
+    enabled: true
+    config:
+      languages:
+        # it's not yet available for Java :)
+        - java
