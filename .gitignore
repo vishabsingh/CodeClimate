@@ -24,6 +24,7 @@ hs_err_pid*
 
 
 target/
+.idea/
 !.mvn/wrapper/maven-wrapper.jar
 ### STS ###
 .apt_generated
