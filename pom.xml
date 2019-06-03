@@ -11,7 +11,7 @@
 	<groupId>com.vn.react</groupId>
 	<artifactId>reactivemongodb</artifactId>
 	<version>2.0</version>
-	<name>reactivespringwithmongodb</name>
+	<name>codeclimate</name>
 	<description>Reactive RESTful Web Service</description>
 	<packaging>jar</packaging>
 
