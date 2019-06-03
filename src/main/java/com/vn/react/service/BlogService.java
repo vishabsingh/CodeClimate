@@ -18,7 +18,7 @@ public interface BlogService {
 	Mono<Blog> createBlog(Blog blog);
 
 	/**
-	 List<Mono> Updated Blog.
+	 Updated Blog.
 	 */
     Mono<Blog> updateBlog(Blog blog, String blogId);
 
@@ -28,28 +28,24 @@ public interface BlogService {
     Flux<Blog> findAll();
 
     /**
-     * @return Mono<Blog>Find One Records.
+     * Find One Records.
      */
     Mono<Blog> findOne(String blogId);
 
     /**
-     * 
-     * @param blogId
-     * {@return Mono<ResponseEntity> Delete.}
+      Delete the blog.
      */
     Mono<ResponseEntity<Void>> delete(String blogId);
 
-    /**
-     * 
-     * @param blogAuthor
-     * {@return Flux<Blog> FindBy Author.}
+    /*
+     Find Blog By Author.
      */
     Flux<Blog> findByAuthor(String blogAuthor);
 
     /**
      *
      * @param blogTitle
-     * {@return Flux<Blog> FindByTile in Blog.}
+     * {@return FindByTile in Blog.}
      */
     Flux<Blog> findByTitleOwn(String blogTitle);
 
