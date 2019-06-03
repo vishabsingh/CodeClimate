@@ -3,6 +3,7 @@ package com.vn.react.filters;
 import com.vn.react.modal.Blog;
 
 public class BlogFliter {
+
 	private String id;
 	
 	private Long version;
