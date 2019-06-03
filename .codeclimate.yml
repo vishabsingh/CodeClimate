@@ -47,3 +47,12 @@ plugins:
         - "java-junit"
   checkstyle:
     enabled: true
+    checks:
+      com:
+        puppycrawl:
+          tools:
+            checkstyle:
+              checks:
+                sizes:
+                  LineLengthCheck:
+                    enable:false
