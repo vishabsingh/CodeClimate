@@ -55,4 +55,4 @@ plugins:
               checks:
                 sizes:
                   LineLengthCheck:
-                    enable:false
+      enabled: false
