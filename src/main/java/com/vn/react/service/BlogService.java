@@ -29,7 +29,7 @@ public interface BlogService {
 
     /**
      * Return All Blog
-     * @return Flux<Blog>Find All Blogs .
+     * @return Flux<Blog>Find All Blog.
      */
     Flux<Blog> findAll();
 
@@ -50,14 +50,14 @@ public interface BlogService {
     /**
      * 
      * @param blogAuthor
-     * @return Flux<Blog> FindBy Author</Blog>
+     * @return Flux<Blog> FindBy Author.
      */
     Flux<Blog> findByAuthor(String blogAuthor);
 
     /**
      *
      * @param blogTitle
-     * @return Flux<Blog> FindByTile in Blog </Blog>
+     * @return Flux<Blog> FindByTile in Blog.
      */
     Flux<Blog> findByTitleOwn(String blogTitle);
 
