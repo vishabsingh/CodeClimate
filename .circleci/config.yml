@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     environment:
-      CC_TEST_REPORTER_ID: b9da374eadcb9306c14c31732f7d10b3fcfe271589048ad21cef5fa2d7477cf6
+      CC_TEST_REPORTER_ID: 001b684be444f3976494ee57ecf10030bfff021eafaad236b8ecc1c9ee5ef993
       MONGO_URL: "mongodb://localhost:27017/data"
     docker:
       - image: circleci/openjdk:8-jdk-browsers

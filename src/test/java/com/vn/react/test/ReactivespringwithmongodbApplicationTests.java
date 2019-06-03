@@ -101,7 +101,7 @@ public class ReactivespringwithmongodbApplicationTests {
 	
 	// SONAR CHANGES
 	@Test
-	public void test10DeleteRecord() {
+	public void test6DeleteRecord() {
 		Blog blogDB = blogRepository.findByAuthor("VISHABSINGH").next().block();
 		webTestClient.delete().uri("/blog/{id}",Collections.singletonMap("id",blogDB.getId()))
 		.exchange()
