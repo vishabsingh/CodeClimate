@@ -1,7 +1,7 @@
 pipeline{
 	agent any
 	tools {
-		maven 'MVN_HOME'
+		maven 'M2_HOME'
 	}
 	environment {
 		//CC_TEST_REPORTER_ID = 001b684be444f3976494ee57ecf10030bfff021eafaad236b8ecc1c9ee5ef993
