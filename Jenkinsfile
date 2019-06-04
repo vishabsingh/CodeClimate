@@ -31,8 +31,6 @@ pipeline{
 	                always {
 	                    junit allowEmptyResults: true, testResults: '/target/surefire-reports/TEST-*.xml'
 	                    jacoco classPattern: '**/target/classes', execPattern: '**/target/**.exec'
-						publishHTML([reportDir: '/target/site/jacoco', reportFiles: 'index.html', reportName: 'JaCoCo Code Coverage'])
-						publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/site/junitReports/', reportFiles: 'surefire-report.html', reportName: 'SureFire-Report', reportTitles: ''])
 	                }
 	            }
 			}
