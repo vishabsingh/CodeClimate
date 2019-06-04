@@ -6,26 +6,25 @@ pipeline{
 
     }
 	stages{
-			stage('Build'){
-				steps{
-					sh "mvn clean package -DskipTests=true"
-
-				}
-			}
-			
-			stage('Test'){
-				steps {
-	                sh 'mvn test surefire-report:report'
-	            }
+		stage('Build'){
+			steps{
+				sh "mvn clean package -DskipTests=true"
 
 			}
-			stage('Codeclimate'){
-				steps{
-					sh "curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter"
-					sh "chmod +x ./cc-test-reporter"
-					sh "./cc-test-reporter before-build --debug"
-				}
+		}
+		stage('Test'){
+			steps {
+				sh 'mvn test surefire-report:report'
 			}
+
+		}
+		stage('Codeclimate'){
+			steps{
+				sh "curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter"
+				sh "chmod +x ./cc-test-reporter"
+				sh "./cc-test-reporter before-build --debug"
+			}
+		}
 	}
 }
 
