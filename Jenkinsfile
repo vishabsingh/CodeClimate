@@ -4,6 +4,9 @@ pipeline{
 		//CC_TEST_REPORTER_ID = 001b684be444f3976494ee57ecf10030bfff021eafaad236b8ecc1c9ee5ef993
 		//CC_TEST_REPORTER_ID = credentials('code_climate')
     }
+	option{
+		gitLabConnection('gihub')
+	}
 	stages{
 			stage('Build'){
 				steps{
