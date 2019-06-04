@@ -40,11 +40,10 @@ pipeline{
 			stage('Codeclimate'){
 				steps{
 					echo 'okkkkk!!!'
-					def response = bat(script: 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64', returnStdout: true)
-					echo 'RESPONSE ${response}'
-					echo 'RESPONSE ${response}'
-					echo 'RESPONSE ${response}'
-					echo 'RESPONSE ${response}'
+					script{
+						def response = bat'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64'
+						echo 'RESPONSE ${response}'
+					}
 				}
 			}
 			stage("SonarQube Anayalsis") {
