@@ -1,7 +1,7 @@
 pipeline{
 	agent any
 	environment {
-		CC_TEST_REPORTER_ID = 001b684be444f3976494ee57ecf10030bfff021eafaad236b8ecc1c9ee5ef993
+		//CC_TEST_REPORTER_ID = 001b684be444f3976494ee57ecf10030bfff021eafaad236b8ecc1c9ee5ef993
 		DOCKER = credentials('dockerhub')
     }
 	stages{
@@ -40,6 +40,11 @@ pipeline{
 			stage('Codeclimate'){
 				steps{
 					echo 'okkkkk!!!'
+					def response = bat(script: 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64', returnStdout: true)
+					echo 'RESPONSE ${response}'
+					echo 'RESPONSE ${response}'
+					echo 'RESPONSE ${response}'
+					echo 'RESPONSE ${response}'
 				}
 			}
 			stage("SonarQube Anayalsis") {
