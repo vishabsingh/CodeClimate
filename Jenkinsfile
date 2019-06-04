@@ -11,6 +11,7 @@ pipeline{
 	stages{
 		stage('Build'){
 			steps{
+				sh "sudo chown jenkins: -R \$PWD/"
 				sh "mvn clean package -DskipTests=true"
 
 			}
