@@ -5,9 +5,6 @@ pipeline{
 		//CC_TEST_REPORTER_ID = credentials('code_climate')
 
     }
-	option{
-		gitLabConnection('GitHub_Email')
-	}
 	stages{
 			stage('Build'){
 				steps{
