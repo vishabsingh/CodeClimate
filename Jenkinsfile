@@ -1,7 +1,8 @@
 pipeline{
 	agent any
 	environment {
-       DOCKER = credentials('dockerhub')
+		CC_TEST_REPORTER_ID = 001b684be444f3976494ee57ecf10030bfff021eafaad236b8ecc1c9ee5ef993
+		DOCKER = credentials('dockerhub')
     }
 	stages{
 			stage('Build'){
@@ -31,7 +32,9 @@ pipeline{
 	                always {
 	                    junit allowEmptyResults: true, testResults: '/target/surefire-reports/TEST-*.xml'
 	                    jacoco classPattern: '**/target/classes', execPattern: '**/target/**.exec'
-	                }
+						publishHTMLReports('target/site/junitReports/','surefire-report.html','SureFire-Report');
+						publishHTMLReports('target/site/jacoco/','index.html','JaCoCoCodeCoverage');
+					}
 	            }
 			}
 			stage('Codeclimate'){
@@ -39,14 +42,33 @@ pipeline{
 					echo 'okkkkk!!!'
 				}
 			}
-			stage('Quality Analysis') {
-	             steps {
-	                  withSonarQubeEnv('Sonar-Qube') {
-	                    bat 'mvn sonar:sonar'
-	                  }
-	            }
-	        }
-        }
+			stage("SonarQube Anayalsis") {
+				steps {
+					withSonarQubeEnv('Sonar6.7') {
+						bat 'mvn sonar:sonar'
+					}
+					script{
+						timeout(time: 10, unit: 'MINUTES') {
+							def qg = waitForQualityGate abortPipeline: true
+							if (qg.status != 'OK') {
+								error "Pipeline aborted due to quality gate failure: ${qg.status}"
+							}
+						}
+					}
+				}
+				post {
+					failure {
+						echo 'SonarQube Quality Gate Failed !!!!!!!'
+						script {
+							currentBuild.result = 'FAILURE'
+						}
+						sendMail('Sonar Quality Gate Failed !')
+					}
+
+				}
+			}
+
+	}
 	post {
 	    success{
 	        sendMail('All Stages Build SucessFully')
@@ -60,4 +82,15 @@ def sendMail(mail_subject ){
       	mimeType: 'text/html' ,
       	subject: mail_subject, 
       	to: 'vishab.singh@tavant.com'
+}
+
+def publishHTMLReports(reportDirectory,reportFileName,reportName) {
+	publishHTML([allowMissing         : false,
+				 alwaysLinkToLastBuild: false,
+				 keepAll              : false,
+				 reportDir            : reportDirectory,
+				 reportName           : reportName,
+				 reportFiles          : reportFileName
+	])
+
 }
