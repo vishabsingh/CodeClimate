@@ -41,7 +41,7 @@ pipeline{
 				steps{
 					echo 'okkkkk!!!'
 					script{
-						def response = bat'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64'
+						def response = bat'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter'
 						echo 'RESPONSE ${response}'
 					}
 				}
