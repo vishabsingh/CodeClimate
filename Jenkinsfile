@@ -6,7 +6,7 @@ pipeline{
 
     }
 	option{
-		gitLabConnection('gihub')
+		gitLabConnection('GitHub_Email')
 	}
 	stages{
 			stage('Build'){
