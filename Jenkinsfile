@@ -34,6 +34,9 @@ pipeline{
        NEXUS_PRIVATE_REPO_URL ="10.131.155.57"
 	   NEXUS_REPO_PORT = "8123"
     }
+	option{
+		gitLabConnection('gihub')
+	}
 	stages{
 			stage('CheckOut'){
 			    steps{
