@@ -4,9 +4,9 @@ spring:
       database: BlogReactive
       host: vs
       port: 27017
-      #username: root
-      #password: admin
-      #authentication-database: admin
+      username: root
+      password: admin
+      authentication-database: admin
       
 server:
   port: 8086
