@@ -2,7 +2,7 @@ spring:
   data:
     mongodb:
       database: BlogReactive
-      host: localhost
+      host: vs
       port: 27017
       #username: root
       #password: admin
