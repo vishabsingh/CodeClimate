@@ -2,6 +2,7 @@ pipeline{
 	agent any
 	tools {
 		maven 'M2_HOME'
+		//jdk 'jdk_1.8.0_151'
 	}
 	environment {
 		//CC_TEST_REPORTER_ID = 001b684be444f3976494ee57ecf10030bfff021eafaad236b8ecc1c9ee5ef993
@@ -11,7 +12,7 @@ pipeline{
 	stages{
 		stage('Build'){
 			steps{
-				sh "sudo chown jenkins: -R \$PWD/"
+				//sh "sudo chown jenkins: -R \$PWD/"
 				sh "mvn clean package -DskipTests=true"
 
 			}
