@@ -28,7 +28,10 @@ pipeline{
 				sh "curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter"
 				sh "chmod +x ./cc-test-reporter"
 				sh "./cc-test-reporter before-build --debug"
+				sh "./cc-test-reporter format-coverage -d -t jacoco target/site/jacoco/jacoco.xml"
 				sh "./cc-test-reporter upload-coverage -r ${CC_TEST_REPORTER_ID}"
+				//sh "./cc-test-reporter format-coverage target/site/jacoco/jacoco.xml --input-type jacoco"
+				//sh "./cc-test-reporter upload-coverage -r ${CC_TEST_REPORTER_ID}"
 			}
 		}
 	}
