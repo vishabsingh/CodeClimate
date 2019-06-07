@@ -29,9 +29,10 @@ pipeline{
 				sh "chmod +x ./cc-test-reporter"
 				sh "./cc-test-reporter before-build --debug"
 				sh "./cc-test-reporter format-coverage  -d -t jacoco --add-prefix /src/main/java/ target/site/jacoco/jacoco.xml"
+				sh "JACOCO_SOURCE_PATH=src/main/java"
+				sh './cc-test-reporter format-coverage target/site/jacoco/jacoco.xml --input-type jacoco'
 				sh "./cc-test-reporter upload-coverage -r ${CC_TEST_REPORTER_ID}"
 				//sh "./cc-test-reporter format-coverage target/site/jacoco/jacoco.xml --input-type jacoco"
-				//sh "./cc-test-reporter upload-coverage -r ${CC_TEST_REPORTER_ID}"
 				//./cc-test-reporter format-coverage -d -t jacoco --add-prefix src/main/java/ ../../../build/reports/jacoco/test/jacocoTestReport.xml
 			}
 		}
