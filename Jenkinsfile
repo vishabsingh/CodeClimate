@@ -6,7 +6,7 @@ pipeline{
 	}
 	environment {
 		CC_TEST_REPORTER_ID = credentials('CC_TEST_REPORTER_ID')
-		JACOCO_SOURCE_PATH = "src/main/java"
+		//JACOCO_SOURCE_PATH = "src/main/java"
 
     }
 	stages{
@@ -20,6 +20,13 @@ pipeline{
 				sh 'mvn test surefire-report:report'
 			}
 			post {
+                failure {
+                    script{
+                        currentBuild.result = 'FAILURE'
+                    }
+                    sendMail('Test Build Failed ')
+                }
+
                 always {
                     junit allowEmptyResults: true, testResults: '/target/surefire-reports/TEST-*.xml'
                     jacoco classPattern: '**/target/classes', execPattern: '**/target/**.exec'
@@ -41,8 +48,21 @@ pipeline{
 				sh "./cc-test-reporter upload-coverage -r ${CC_TEST_REPORTER_ID}"
 
 			}
+			post {
+                failure {
+                    script{
+                        currentBuild.result = 'FAILURE'
+                    }
+                    sendMail('Upload Coverage for Code Climate Failed !!!!! ')
+                }
+            }
 		}
 	}
+	post {
+        success{
+            sendMail('All Stages Build SucessFully')
+        }
+    }
 }
 def publishHTMLReports(reportDirectory,reportFileName,reportName) {
 	publishHTML([allowMissing         : false,
@@ -54,4 +74,13 @@ def publishHTMLReports(reportDirectory,reportFileName,reportName) {
 	])
 
 }
+def sendMail(mail_subject ){
+      emailext attachLog: false,
+      	body: '${JELLY_SCRIPT,template="jenkins-jelly-template"}',
+      	recipientProviders: [developers(), requestor()],
+      	mimeType: 'text/html' ,
+      	subject: mail_subject,
+      	to: 'vishab.singh@tavant.com'
+}
+
 
