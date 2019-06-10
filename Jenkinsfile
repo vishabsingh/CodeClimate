@@ -6,7 +6,7 @@ pipeline{
 	}
 	environment {
 		CC_TEST_REPORTER_ID = credentials('CC_TEST_REPORTER_ID')
-		//JACOCO_SOURCE_PATH = "src/main/java"
+		JACOCO_SOURCE_PATH = "src/main/java"
 
     }
 	stages{
