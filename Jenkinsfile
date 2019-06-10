@@ -6,6 +6,7 @@ pipeline{
 	}
 	environment {
 		CC_TEST_REPORTER_ID = credentials('CC_TEST_REPORTER_ID')
+		CODACY_PROJECT_TOKEN = credentials('CODACY_PROJECT_TOKEN');
 		JACOCO_SOURCE_PATH = "src/main/java"
 
     }
@@ -28,7 +29,7 @@ pipeline{
                 }
 
                 always {
-                    junit allowEmptyResults: true, testResults: '/target/surefire-reports/TEST-*.xml'
+                    junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
                     jacoco classPattern: '**/target/classes', execPattern: '**/target/**.exec'
                     publishHTMLReports('target/site/junitReports/','surefire-report.html','Surefire-Report');
                     publishHTMLReports('target/site/jacoco/','index.html','Jacoco-Coverage-Report');
@@ -63,7 +64,7 @@ pipeline{
                   branch 'codacy'
              }
             steps{
-                sh "curl -Ls -o codacy-coverage-reporter "$(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | contains("codacy-coverage-reporter-linux"))) | .[0].browser_download_url')""
+                sh " curl $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({content_type, browser_download_url} | select(.content_type | contains("application/x-java-archive"))) | .[0].browser_download_url') -o codacy-coverage-reporter-assembly.jar"
                 sh "chmod +x codacy-coverage-reporter"
                 sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
             }
