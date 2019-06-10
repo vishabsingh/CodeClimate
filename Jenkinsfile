@@ -37,6 +37,7 @@ pipeline{
             }
 
 		}
+
 		stage('Upload Test Coverage For Code Climate '){
 		     when {
                   branch 'codeclimate'
@@ -44,7 +45,6 @@ pipeline{
 			steps{
 				sh "curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter"
 				sh "chmod +x ./cc-test-reporter"
-				//sh "./cc-test-reporter format-coverage  -d -t jacoco --add-prefix /src/main/java/ target/site/jacoco/jacoco.xml"
 				sh './cc-test-reporter format-coverage target/site/jacoco/jacoco.xml --input-type jacoco'
 				sh "./cc-test-reporter upload-coverage -r ${CC_TEST_REPORTER_ID}"
 
@@ -58,6 +58,24 @@ pipeline{
                 }
             }
 		}
+		stage('Upload Test Coverage For Codacy '){
+             when {
+                  branch 'codacy'
+             }
+            steps{
+                sh "curl -Ls -o codacy-coverage-reporter "$(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | contains("codacy-coverage-reporter-linux"))) | .[0].browser_download_url')"
+                sh "chmod +x codacy-coverage-reporter"
+                sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
+            }
+            post {
+                failure {
+                    script{
+                        currentBuild.result = 'FAILURE'
+                    }
+                    sendMail('Upload Coverage for Codacy !!!!! ')
+                }
+            }
+        }
 	}
 	post {
         success{
@@ -77,7 +95,7 @@ def publishHTMLReports(reportDirectory,reportFileName,reportName) {
 }
 def sendMail(mail_subject ){
       emailext attachLog: false,
-      	body: '${JELLY_SCRIPT,template="jenkins-jelly-template"}',
+        body: '${JELLY_SCRIPT,template="jenkins-jelly-template"}',
       	recipientProviders: [developers(), requestor()],
       	mimeType: 'text/html' ,
       	subject: mail_subject,
