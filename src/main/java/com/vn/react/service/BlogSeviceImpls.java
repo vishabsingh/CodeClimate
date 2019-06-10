@@ -49,6 +49,10 @@ public class BlogSeviceImpls  implements BlogService{
 					
 		}).collectList();
 	   list.flux().subscribe(s ->LOGGER.info("{} ",s));
+	   int a= 12;
+	   a= 13;
+	   a= 12;
+	   a= 13;
 	  return blogRepo.findAll();
 	}
 	
