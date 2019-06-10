@@ -5,9 +5,8 @@ pipeline{
 		//jdk 'jdk_1.8.0_151'
 	}
 	environment {
-		//CC_TEST_REPORTER_ID = 001b684be444f3976494ee57ecf10030bfff021eafaad236b8ecc1c9ee5ef993
 		CC_TEST_REPORTER_ID = credentials('CC_TEST_REPORTER_ID')
-		JACOCO_SOURCE_PATH = "src/main/java"
+		//JACOCO_SOURCE_PATH = "src/main/java"
 
     }
 	stages{
