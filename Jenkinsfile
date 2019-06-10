@@ -7,13 +7,12 @@ pipeline{
 	environment {
 		//CC_TEST_REPORTER_ID = 001b684be444f3976494ee57ecf10030bfff021eafaad236b8ecc1c9ee5ef993
 		CC_TEST_REPORTER_ID = credentials('CC_TEST_REPORTER_ID')
-		JACOCO_SOURCE_PATH = "src/main/java"
+		//JACOCO_SOURCE_PATH = "src/main/java"
 
     }
 	stages{
 		stage('Build'){
 			steps{
-				//sh "sudo chown jenkins: -R \$PWD/"
 				sh "mvn clean package -DskipTests=true"
 
 			}
@@ -24,7 +23,10 @@ pipeline{
 			}
 
 		}
-		stage('Codeclimate'){
+		stage('Upload Test Coverage For Code Climate '){
+		     when {
+                  branch 'codeclimate'
+             }
 			steps{
 				sh "curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter"
 				sh "chmod +x ./cc-test-reporter"
