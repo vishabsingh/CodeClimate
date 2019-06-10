@@ -24,7 +24,7 @@ pipeline{
                     junit allowEmptyResults: true, testResults: '/target/surefire-reports/TEST-*.xml'
                     jacoco classPattern: '**/target/classes', execPattern: '**/target/**.exec'
                     publishHTMLReports('target/site/junitReports/','surefire-report.html','Surefire-Report');
-                    publishHTMLReports('target/site/jacoco/','index.html','Jacoco-CodeCoverage-Report');
+                    publishHTMLReports('target/site/jacoco/','index.html','Jacoco-Coverage-Report');
 
                 }
             }
