@@ -20,6 +20,15 @@ pipeline{
 			steps {
 				sh 'mvn test surefire-report:report'
 			}
+			post {
+                always {
+                    junit allowEmptyResults: true, testResults: '/target/surefire-reports/TEST-*.xml'
+                    jacoco classPattern: '**/target/classes', execPattern: '**/target/**.exec'
+                    publishHTMLReports('target/site/junitReports/','surefire-report.html','Surefire-Report');
+                    publishHTMLReports('target/site/jacoco/','index.html','Jacoco-CodeCoverage-Report');
+
+                }
+            }
 
 		}
 		stage('Upload Test Coverage For Code Climate '){
@@ -35,5 +44,15 @@ pipeline{
 			}
 		}
 	}
+}
+def publishHTMLReports(reportDirectory,reportFileName,reportName) {
+	publishHTML([allowMissing         : false,
+				 alwaysLinkToLastBuild: false,
+				 keepAll              : false,
+				 reportDir            : reportDirectory,
+				 reportName           : reportName,
+				 reportFiles          : reportFileName
+	])
+
 }
 
