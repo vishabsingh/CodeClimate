@@ -64,7 +64,8 @@ pipeline{
                   branch 'codacy'
              }
             steps{
-                sh " curl $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({content_type, browser_download_url} | select(.content_type | contains("application/x-java-archive"))) | .[0].browser_download_url') -o codacy-coverage-reporter-assembly.jar"
+                sh "LATEST_VERSION='$(curl -Ls https://api.bintray.com/packages/codacy/Binaries/codacy-coverage-reporter/versions/_latest | jq -r .name)'"
+                sh "curl -Ls -o codacy-coverage-reporter 'https://dl.bintray.com/codacy/Binaries/${LATEST_VERSION}/codacy-coverage-reporter-linux'"
                 sh "chmod +x codacy-coverage-reporter"
                 sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
             }
