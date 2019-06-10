@@ -57,6 +57,13 @@ public class BlogSeviceImpls  implements BlogService{
 		a= 13;
 		a= 12;
 		a= 13;
+		a= 13;
+		a= 12;
+		a= 13;
+		a= 12;
+		a= 13;
+		a= 12;
+		a= 13;
 	  return blogRepo.findAll();
 	}
 	
