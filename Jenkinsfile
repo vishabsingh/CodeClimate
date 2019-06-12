@@ -70,7 +70,8 @@ pipeline{
                 //sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
                 sh "curl -Ls -o codacy-coverage-reporter https://github.com/codacy/codacy-coverage-reporter/releases/download/6.0.0/codacy-coverage-reporter-6.0.0-assembly.jar"
                 sh "chmod +x codacy-coverage-reporter"
-                sh "java -jar codacy-coverage-reporter-6.0.0-assembly.jar report -l Java -r target/site/jacoco/jacoco.xml"
+                //sh "java -jar codacy-coverage-reporter-6.0.0-assembly.jar report -l Java -r target/site/jacoco/jacoco.xml"
+                sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
 
             }
             post {
