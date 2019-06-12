@@ -64,10 +64,13 @@ pipeline{
                   branch 'codacy'
              }
             steps{
-               sh "curl -Ls -o codacy-coverage-reporter https://dl.bintray.com/codacy/Binaries/curl -Ls https://api.bintray.com/packages/codacy/Binaries/codacy-coverage-reporter/versions/_latest | jq -r .name/codacy-coverage-reporter-linux "
+               //sh "curl -Ls -o codacy-coverage-reporter https://dl.bintray.com/codacy/Binaries/curl -Ls https://api.bintray.com/packages/codacy/Binaries/codacy-coverage-reporter/versions/_latest | jq -r .name/codacy-coverage-reporter-linux "
                 //sh "curl -Ls -o codacy-coverage-reporter-assembly.jar curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({content_type, browser_download_url} | select(.content_type | contains('java-archive'))) | .[0].browser_download_url')"
-                sh "chmod +x codacy-coverage-reporter"
-                sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
+               // sh "chmod +x codacy-coverage-reporter"
+                //sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
+                sh "curl -Ls -o codacy-coverage-reporter https://github.com/codacy/codacy-coverage-reporter/releases/download/6.0.0/codacy-coverage-reporter-6.0.0-assembly.jar"
+                sh "chmod +x codacy-coverage-reporter
+                sh "java -jar codacy-coverage-reporter--6.0.0-assembly.jar report -l Java -r jacoco.xml"
 
             }
             post {
