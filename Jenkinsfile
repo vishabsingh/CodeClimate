@@ -69,8 +69,14 @@ pipeline{
                 //sh "curl -L https://dl.bintray.com/codacy/Binaries/curl -L https://api.bintray.com/packages/codacy/Binaries/codacy-coverage-reporter/versions/_latest | jq -r .name/codacy-coverage-reporter-linux  > ./codacy-coverage-reporter"
                 //sh "chmod +x codacy-coverage-reporter"
                 //sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
-                sh "curl -Ls -o codacy-coverage-reporter-assembly.jar $(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({content_type, browser_download_url} | select(.content_type | contains('\"java-archive\"'))) | .[0].browser_download_url')"
-                sh "java -jar codacy-coverage-reporter-assembly.jar report -l Java -r jacoco.xml"
+                sh "curl -Ls -o codacy-coverage-reporter-assembly.jar $(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({content_type, browser_download_url} | select(.content_type | contains("java-archive"))) | .[0].browser_download_url')"
+                sh '''
+                        LATEST_VERSION="$(curl -Ls https://api.bintray.com/packages/codacy/Binaries/codacy-coverage-reporter/versions/_latest | jq -r .name)"
+                        curl -Ls -o codacy-coverage-reporter-assembly.jar "https://dl.bintray.com/codacy/Binaries/${LATEST_VERSION}/codacy-coverage-reporter-assembly.jar"
+                '''
+                //sh "java -jar codacy-coverage-reporter-assembly.jar report -l Java -r jacoco.xml"
+                sh "chmod +x codacy-coverage-reporter"
+                sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
 
 
             }
