@@ -65,11 +65,11 @@ pipeline{
              }
             steps{
                 sh '''
-                    curl -Ls -o codacy-coverage-reporter "$(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest
-                    | jq -r '.assets
-                    | map({name, browser_download_url}
-                    | select(.name | contains("codacy-coverage-reporter-linux")))
-                    |.[0].browser_download_url')"
+                    curl -Ls -o codacy-coverage-reporter "$(curl -Ls https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest |
+                    jq -r '.assets |
+                    map({name, browser_download_url} |
+                    select(.name | contains("codacy-coverage-reporter-linux"))) |
+                    .[0].browser_download_url')"
                  '''
                 sh "chmod +x codacy-coverage-reporter"
                 sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
