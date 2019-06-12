@@ -73,7 +73,7 @@ pipeline{
                     select(.name | contains("codacy-coverage-reporter-linux"))) |
                     .[0].browser_download_url')"
                  '''
-                //sh "chmod +x codacy-coverage-reporter"
+                sh "chmod +x codacy-coverage-reporter"
                 //sh "./codacy-coverage-reporter report -l Java -r target/site/jacoco/jacoco.xml"
 
 
