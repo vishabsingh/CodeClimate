@@ -1,9 +1,11 @@
 pipeline{
-	agent any
-	tools {
-		maven 'M2_HOME'
-		//jdk 'jdk_1.8.0_151'
-	}
+	agent{
+           label "master"
+     }
+    tools {
+        maven "Maven-3.3.9"
+        jdk "JAVA_HOME"
+    }
 	environment {
 		CC_TEST_REPORTER_ID = credentials('CC_TEST_REPORTER_ID')
 		JACOCO_SOURCE_PATH = "src/main/java"
