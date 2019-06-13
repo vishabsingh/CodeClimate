@@ -4,7 +4,7 @@ pipeline{
      }
     tools {
         maven "Maven-3.3.9"
-        jdk "JAVA_HOME"
+        //jdk "JAVA_HOME"
     }
 	environment {
 		CC_TEST_REPORTER_ID = credentials('CC_TEST_REPORTER_ID')
