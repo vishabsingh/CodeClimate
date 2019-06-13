@@ -26,6 +26,11 @@
 
 		<pmd.plugin.version>3.12.0</pmd.plugin.version>
 		<maven.findbugs.plugin>3.0.5</maven.findbugs.plugin>
+
+
+		<surefire.test.failure.ignore>true</surefire.test.failure.ignore>
+		<jacoco.coverage.check.skip>true</jacoco.coverage.check.skip>
+		<jacoco.report.skip>true</jacoco.report.skip>
 	</properties>
 
 	<dependencies>
@@ -168,11 +173,6 @@
 						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<systemPropertyVariables>
-						<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-					</systemPropertyVariables>
-				</configuration>
 			</plugin>
 		</plugins>
 	<pluginManagement>

@@ -85,6 +85,27 @@ pipeline{
                 }
             }
         }
+        stage('SonarQube Analysis'){
+            steps{
+                withSonarQubeEnv('Sonar6.7') {
+                    sh  "mvn sonar:sonar -Dsonar.projectName=Codeclimate -Dsonar.projectKey=Codeclimate"
+                }
+                 script{
+                        timeout(time: 20, unit: 'MINUTES') {
+                            def qg = waitForQualityGate abortPipeline: true
+                            if (qg.status != 'OK') {
+                                error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                            }
+                        }
+                    }
+            }
+            post {
+                failure {
+                    script {currentBuild.result = 'FAILURE'}
+                    sendMail('Quality Gate Failed !!!!')
+                }
+            }
+        }
 	}
 	post {
         success{
