@@ -28,21 +28,17 @@ public class BlogController {
 	}
 
 	@GetMapping("/{id}")
-	public Mono<Blog> findOne(@PathVariable final String id){
-		LOGGER.info(" id {} ",id);
-		return blogService.findOne(id);
-	}
+	public Mono<Blog> findOne(@PathVariable final String id){ return blogService.findOne(id); }
 
 	@PostMapping
-	public Mono<ResponseEntity<Blog>> save(@RequestBody final BlogFliter blog) {
+	public Mono<ResponseEntity<Blog>> save(@RequestBody  BlogFliter blog) {
 		return blogService.createBlog(blog.blogFliterToBlog(blog))
 				.map(ResponseEntity::ok)
 				.defaultIfEmpty(ResponseEntity.notFound().build());
-
 	}
 
 	@PutMapping("/{id}")
-	public Mono<ResponseEntity<Blog>> update(@RequestBody BlogFliter blogFliter,@PathVariable final  String id){
+	public Mono<ResponseEntity<Blog>> update(@RequestBody BlogFliter blogFliter,@PathVariable String id){
 		return blogService.updateBlog(blogFliter.blogFliterToBlog(blogFliter),id)
 				.map(updatedBlog -> new ResponseEntity<>(updatedBlog, HttpStatus.OK))
 				.defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
