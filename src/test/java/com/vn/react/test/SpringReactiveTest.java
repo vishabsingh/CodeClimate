@@ -2,7 +2,6 @@ package com.vn.react.test;
 
 import java.util.Collections;
 
-import javax.xml.ws.RespectBinding;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
@@ -26,7 +25,7 @@ import reactor.core.publisher.Mono;
 @RunWith(SpringRunner.class)
 @SpringBootTest( webEnvironment=  SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ReactivespringwithmongodbApplicationTests {
+public class SpringReactiveTest {
 
 		@Autowired
 		private WebTestClient webTestClient;

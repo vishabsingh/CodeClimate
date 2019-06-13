@@ -17,8 +17,6 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/blog")
 public class BlogController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(BlogController.class);
-
 	@Autowired
 	private BlogService blogService;
 
@@ -28,16 +26,11 @@ public class BlogController {
 	}
 
 	@GetMapping("/{id}")
-	public Mono<Blog> findOne(@PathVariable final String id){
-		LOGGER.info(" id {} ",id);
-		return blogService.findOne(id);
-	}
+	public Mono<Blog> findOne(@PathVariable final String id){ return blogService.findOne(id); }
 
 	@PostMapping
-	public Mono<ResponseEntity<Blog>> save(@RequestBody final BlogFliter blog) {
-		return blogService.createBlog(blog.blogFliterToBlog(blog))
-				.map(ResponseEntity::ok)
-				.defaultIfEmpty(ResponseEntity.notFound().build());
+	public Mono<ResponseEntity<Blog>> save(@RequestBody BlogFliter blog) {
+		return blogService.createBlog(blog.blogFliterToBlog(blog)).map(ResponseEntity::ok).defaultIfEmpty(ResponseEntity.notFound().build());
 
 	}
 
@@ -64,8 +57,6 @@ public class BlogController {
 	}
 	
 	@ExceptionHandler(WebClientResponseException.class)
-    public ResponseEntity<String> handleWebClientResponseException(WebClientResponseException ex) {
-        return ResponseEntity.status(ex.getRawStatusCode()).body(ex.getResponseBodyAsString());
-    }
+    public ResponseEntity<String> handleWebClientResponseException(WebClientResponseException ex) { return ResponseEntity.status(ex.getRawStatusCode()).body(ex.getResponseBodyAsString()); }
 
 }

@@ -13,11 +13,9 @@ import java.io.Serializable;
 /**
  * Blog Entity.
  * @author vishab.singh
- *
  */
 @Document(collection = "BLOG")
-public class Blog implements Serializable{ 
-
+public class Blog implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id

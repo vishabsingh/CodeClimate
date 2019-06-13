@@ -46,7 +46,6 @@ public class BlogSeviceImpls  implements BlogService{
 			blogFliter.setVersion(blog.getVersion());
 			blogFliter.setTitle(blog.getTitle());
 			return blogFliter;
-					
 		}).collectList();
 	   list.flux().subscribe(s ->LOGGER.info("{} ",s));
 	  return blogRepo.findAll();
