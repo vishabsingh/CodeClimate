@@ -1,7 +1,7 @@
 pipeline{
 
 	agent{
-            label "master"
+       label "master"
     }
 	tools {
 		maven "Maven-3.3.9"
@@ -63,8 +63,7 @@ pipeline{
             }
 		}
 		stage('Upload Test Coverage For Codacy '){
-             when {maven "Maven-3.3.9"
-        jdk "JAVA_HOME"
+             when {
                   branch 'codacy'
              }
             steps{
