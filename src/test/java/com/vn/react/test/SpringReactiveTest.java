@@ -23,7 +23,7 @@ import reactor.core.publisher.Mono;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest( webEnvironment=  SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest( webEnvironment =  SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SpringReactiveTest {
 
